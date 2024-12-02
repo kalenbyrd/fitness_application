@@ -39,7 +39,8 @@ This is a Flask local API.
 
 | HTTP Method | Endpoint                | Description                       |
 |-------------|-------------------------|-----------------------------------|
-| GET         | `/workouts/<id>`       | Fetch a single workout by ID.    |
+| GET         | `/workouts/<id>`       | Fetch a single workouts by user_id.    |
+| GET         | `/workout_by_id/<id>`       | Fetch a single workout by workout_id.    |
 | POST        | `/workouts`            | Procedure. Add a new workout. Should increment workout in progress table Must specify user id              |
 | POST        | `/workouts_with_exercises` | Transaction. Add a workout with exercises.   |
 | PUT         | `/workouts/<id>`       | Update workout details.          |
@@ -59,6 +60,7 @@ This is a Flask local API.
 | HTTP Method | Endpoint                | Description                       |
 |-------------|-------------------------|-----------------------------------|
 | GET         | `/diet/<user_id>`      | Fetch diet entries by user ID.   |
+| GET         | `/diet_by_id/<user_id>`      | Fetch a single diet entry by diet ID.   |
 | POST        | `/diet`                | Add a new diet entry. Must specify user id          |
 | PUT         | `/diet/<id>`           | Update diet entry details.       |
 | DELETE      | `/diet/<id>`           | Delete a diet entry by ID.       |
@@ -68,6 +70,7 @@ This is a Flask local API.
 | HTTP Method | Endpoint                | Description                       |
 |-------------|-------------------------|-----------------------------------|
 | GET         | `/goals/<user_id>`     | Fetch goals by user ID.          |
+| GET         | `/goal_by_id/<user_id>`     | Fetch a single goal by goal ID.          |
 | POST        | `/goals`               | Add a new goal. Must specify user id                  |
 | PUT         | `/goals/<id>`          | Update goal details.             |
 | DELETE      | `/goals/<id>`          | Delete a goal by ID.             |
@@ -77,6 +80,7 @@ This is a Flask local API.
 | HTTP Method | Endpoint                | Description                       |
 |-------------|-------------------------|-----------------------------------|
 | GET         | `/progress/<user_id>`  | Fetch progress entries by user ID.|
+| GET         | `/progress_by_id/<user_id>`  | Fetch a progress entry by progress ID.|
 | POST        | `/progress`            | Add a new progress entry. Must specify user id        |
 | PUT         | `/progress/<id>`       | Update progress entry details.   |
 | DELETE      | `/progress/<id>`       | Delete a progress entry by ID.   |
