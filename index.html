@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Fitness Application</title>
+</head>
+<body>
+    <!-- Users Section -->
+        <div id="users-section">
+            <h2>Users</h2>
+
+            <!-- Fetch Users Button -->
+            <button id="fetch-users">Fetch All Users</button>
+
+            <!-- Add User Button -->
+            <button id="toggle-add-form" style="display:none;">Add User</button>
+
+            <!-- Table to display user data -->
+            <table id="users-table" border="1" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Height (cm)</th>
+                        <th>Weight (kg)</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- User data will be inserted here -->
+                </tbody>
+            </table>
+
+            <!-- Add User Form (Initially Hidden) -->
+            <form id="add-user-form" style="display:none;">
+                <input type="email" id="user-email" placeholder="Email" required>
+                <input type="text" id="user-name" placeholder="Name">
+                <input type="number" id="user-age" placeholder="Age">
+                <input type="number" id="user-height" placeholder="Height (cm)">
+                <input type="number" id="user-weight" placeholder="Weight (kg)">
+                <button type="submit">Add User</button>
+                <button type="button" id="close-add-form">Close Form</button>
+            </form>
+
+            <!-- Update User Form (Initially Hidden) -->
+            <form id="update-user-form" style="display:none;">
+                <input type="number" id="update-user-id" placeholder="User ID" required>
+                <input type="email" id="update-user-email" placeholder="Email">
+                <input type="text" id="update-user-name" placeholder="Name">
+                <input type="number" id="update-user-age" placeholder="Age">
+                <input type="number" id="update-user-height" placeholder="Height (cm)">
+                <input type="number" id="update-user-weight" placeholder="Weight (kg)">
+                <button type="submit">Update User</button>
+                <button type="button" id="close-edit-form">Close Form</button>
+            </form>
+        </div>
+
+
+
+    <!-- Workouts Section -->
+    <div id="workouts-section">
+        <h2>Workouts</h2>
+        
+        <!-- Form to enter User ID to fetch workouts -->
+        <form id="workout-id-form">
+            <input type="number" id="user-id-input" placeholder="Enter User ID" required>
+            <button type="submit">Fetch Workouts</button>
+        </form>
+
+        <!-- Button to show the "Add Workout" form -->
+        <button id="show-add-workout-form-btn">Add New Workout</button>
+
+        <!-- Table to display workout data -->
+        <table id="workouts-table" border="1" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Workout ID</th>
+                    <th>Workout Type</th>
+                    <th>Duration (minutes)</th>
+                    <th>Calories Burned</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Workout data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add Workout Form (Initially Hidden) -->
+        <form id="add-workout-form" style="display:none;">
+            <input type="number" id="workout-user-id" placeholder="User ID" required>
+            <input type="text" id="workout-type" placeholder="Workout Type">
+            <input type="number" id="workout-duration" placeholder="Duration (minutes)">
+            <input type="number" id="workout-calories" placeholder="Calories Burned">
+            <textarea id="workout-notes" placeholder="Notes"></textarea>
+            <button type="submit">Add Workout</button>
+            <button type="button" id="close-add-workout-form">Close Form</button>
+        </form>
+
+        <!-- Update Workout Form (Initially Hidden) -->
+        <form id="update-workout-form" style="display:none;">
+            <input type="number" id="update-workout-id" placeholder="Workout ID" readonly>
+            <input type="number" id="update-workout-user-id" placeholder="User ID" required>
+            <input type="text" id="update-workout-type" placeholder="Workout Type">
+            <input type="number" id="update-workout-duration" placeholder="Duration (minutes)">
+            <input type="number" id="update-workout-calories" placeholder="Calories Burned">
+            <textarea id="update-workout-notes" placeholder="Notes"></textarea>
+            <button type="submit">Update Workout</button>
+            <button type="button" id="close-update-workout-form">Close Form</button>
+        </form>
+
+        <!-- Add Workout with Exercises Form (Initially Hidden) -->
+        <form id="add-workout-with-exercises-form" style="display:none;">
+            <h3>Add Workout with Exercises</h3>
+            <h4>Workout Details</h4>
+            <input type="number" id="transaction-workout-user-id" placeholder="User ID" required>
+            <input type="text" id="transaction-workout-type" placeholder="Workout Type">
+            <input type="number" id="transaction-workout-duration" placeholder="Duration (minutes)">
+            <input type="number" id="transaction-workout-calories" placeholder="Calories Burned">
+            <textarea id="transaction-workout-notes" placeholder="Notes"></textarea>
+            <h4>Exercises</h4>
+            <div id="transaction-exercises-container">
+                <div class="exercise-entry">
+                    <input type="text" class="transaction-exercise-name" placeholder="Exercise Name">
+                    <input type="number" class="transaction-exercise-sets" placeholder="Sets">
+                    <input type="number" class="transaction-exercise-reps" placeholder="Reps Per Set">
+                    <input type="number" class="transaction-exercise-duration" placeholder="Duration (minutes)">
+                    <input type="number" class="transaction-exercise-calories" placeholder="Calories Burned">
+                </div>
+            </div>
+            <button type="button" id="add-exercise-entry">Add Exercise</button>
+            <button type="submit">Submit Workout with Exercises</button>
+            <button type="button" id="close-workout-with-exercises-form">Close Form</button>
+        </form>
+        <button id="show-add-workout-with-exercises-form-btn">Add Workout with Exercises</button>
+
+    </div>
+
+    <!-- Exercises Section -->
+    <div id="exercises-section">
+        <h2>Exercises</h2>
+
+        <!-- Form to enter Workout ID to fetch exercises -->
+        <form id="exercise-workout-id-form">
+            <input type="number" id="workout-id-input" placeholder="Enter Workout ID" required>
+            <button type="submit">Fetch Exercises</button>
+        </form>
+
+        <!-- Button to show the "Add Exercise" form -->
+        <button id="show-add-exercise-form-btn">Add New Exercise</button>
+
+        <!-- Table to display exercise data -->
+        <table id="exercises-table" border="1" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Exercise ID</th>
+                    <th>Exercise Name</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Duration (minutes)</th>
+                    <th>Calories Burned</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exercise data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add Exercise Form (Initially Hidden) -->
+        <form id="add-exercise-form" style="display:none;">
+            <input type="number" id="exercise-workout-id" placeholder="Workout ID" required>
+            <input type="text" id="exercise-name" placeholder="Exercise Name">
+            <input type="number" id="exercise-sets" placeholder="Sets">
+            <input type="number" id="exercise-reps" placeholder="Reps Per Set">
+            <input type="number" id="exercise-duration" placeholder="Duration (minutes)">
+            <input type="number" id="exercise-calories" placeholder="Calories Burned">
+            <button type="submit">Add Exercise</button>
+            <button type="button" id="close-add-exercise-form">Close Form</button>
+        </form>
+
+        <!-- Update Exercise Form (Initially Hidden) -->
+        <form id="update-exercise-form" style="display:none;">
+            <input type="number" id="update-exercise-id" placeholder="Exercise ID" readonly>
+            <input type="number" id="update-exercise-workout-id" placeholder="Workout ID" required>
+            <input type="text" id="update-exercise-name" placeholder="Exercise Name">
+            <input type="number" id="update-exercise-sets" placeholder="Sets">
+            <input type="number" id="update-exercise-reps" placeholder="Reps Per Set">
+            <input type="number" id="update-exercise-duration" placeholder="Duration (minutes)">
+            <input type="number" id="update-exercise-calories" placeholder="Calories Burned">
+            <button type="submit">Update Exercise</button>
+            <button type="button" id="close-update-exercise-form">Close Form</button>
+        </form>
+    </div>
+
+    <!-- Diet Section -->
+    <div id="diet-section">
+        <h2>Diet</h2>
+
+        <!-- Form to enter User ID to fetch diet entries -->
+        <form id="diet-user-id-form">
+            <input type="number" id="diet-user-id-input" placeholder="Enter User ID" required>
+            <button type="submit">Fetch Diet Entries</button>
+        </form>
+
+        <!-- Button to show the "Add Diet Entry" form -->
+        <button id="show-add-diet-form-btn">Add New Diet Entry</button>
+
+        <!-- Table to display diet data -->
+        <table id="diet-table" border="1" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Diet ID</th>
+                    <th>User ID</th>
+                    <th>Meal Type</th>
+                    <th>Calories</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Diet data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add Diet Form (Initially Hidden) -->
+        <form id="add-diet-form" style="display:none;">
+            <input type="number" id="diet-user-id" placeholder="User ID" required>
+            <input type="text" id="diet-meal-type" placeholder="Meal Type (e.g., Breakfast, Lunch)">
+            <input type="number" id="diet-calories" placeholder="Calories">
+            <textarea id="diet-description" placeholder="Description"></textarea>
+            <button type="submit">Add Diet Entry</button>
+            <button type="button" id="close-add-diet-form">Close Form</button>
+        </form>
+
+        <!-- Update Diet Form (Initially Hidden) -->
+        <form id="update-diet-form" style="display:none;">
+            <input type="number" id="update-diet-id" placeholder="Diet ID" readonly>
+            <input type="number" id="update-diet-user-id" placeholder="User ID" required>
+            <input type="text" id="update-diet-meal-type" placeholder="Meal Type">
+            <input type="number" id="update-diet-calories" placeholder="Calories">
+            <textarea id="update-diet-description" placeholder="Description"></textarea>
+            <button type="submit">Update Diet Entry</button>
+            <button type="button" id="close-update-diet-form">Close Form</button>
+        </form>
+    </div>
+
+    <!-- Goals Section -->
+    <div id="goals-section">
+        <h2>Goals</h2>
+
+        <!-- Form to enter User ID to fetch goals -->
+        <form id="goal-user-id-form">
+            <input type="number" id="goal-user-id-input" placeholder="Enter User ID" required>
+            <button type="submit">Fetch Goals</button>
+        </form>
+
+        <!-- Button to show the "Add Goal" form -->
+        <button id="show-add-goal-form-btn">Add New Goal</button>
+
+        <!-- Table to display goal data -->
+        <table id="goals-table" border="1" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Goal ID</th>
+                    <th>Goal Type</th>
+                    <th>Target Value</th>
+                    <th>Current Progress</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Goal data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add Goal Form (Initially Hidden) -->
+        <form id="add-goal-form" style="display:none;">
+            <input type="number" id="goal-user-id" placeholder="User ID" required>
+            <input type="text" id="goal-type" placeholder="Goal Type">
+            <input type="number" id="goal-target-value" placeholder="Target Value">
+            <input type="number" id="goal-current-progress" placeholder="Current Progress">
+            <input type="date" id="goal-deadline" placeholder="Deadline">
+            <input type="text" id="goal-status" placeholder="Status">
+            <button type="submit">Add Goal</button>
+            <button type="button" id="close-add-goal-form">Close Form</button>
+        </form>
+
+        <!-- Update Goal Form (Initially Hidden) -->
+        <form id="update-goal-form" style="display:none;">
+            <input type="number" id="update-goal-id" placeholder="Goal ID" readonly>
+            <input type="number" id="update-goal-user-id" placeholder="User ID" required>
+            <input type="text" id="update-goal-type" placeholder="Goal Type">
+            <input type="number" id="update-goal-target-value" placeholder="Target Value">
+            <input type="number" id="update-goal-current-progress" placeholder="Current Progress">
+            <input type="date" id="update-goal-deadline" placeholder="Deadline">
+            <input type="text" id="update-goal-status" placeholder="Status">
+            <button type="submit">Update Goal</button>
+            <button type="button" id="close-update-goal-form">Close Form</button>
+        </form>
+    </div>
+
+    <!-- Progress Section -->
+    <div id="progress-section">
+        <h2>Progress</h2>
+
+        <!-- Form to enter User ID to fetch progress -->
+        <form id="progress-user-id-form">
+            <input type="number" id="progress-user-id-input" placeholder="Enter User ID" required>
+            <button type="submit">Fetch Progress</button>
+        </form>
+
+        <!-- Button to show the "Add Progress" form -->
+        <button id="show-add-progress-form-btn">Add New Progress</button>
+
+        <!-- Table to display progress data -->
+        <table id="progress-table" border="1" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Progress ID</th>
+                    <th>Weight</th>
+                    <th>Workout Count</th>
+                    <th>Calories Burned</th>
+                    <th>Date</th>
+                    <th>Goal ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Progress data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add Progress Form (Initially Hidden) -->
+        <form id="add-progress-form" style="display: none;">
+            <input type="number" id="progress-user-id" placeholder="User ID" required>
+            <input type="number" id="progress-weight" placeholder="Weight">
+            <input type="number" id="progress-workout-count" placeholder="Workout Count">
+            <input type="number" id="progress-calories-burned" placeholder="Calories Burned">
+            <input type="date" id="progress-date" placeholder="Date">
+            <input type="number" id="progress-goal-id" placeholder="Goal ID">
+            <button type="submit">Add Progress</button>
+            <button type="button" id="close-add-progress-form">Close Form</button>
+        </form>
+
+        <!-- Update Progress Form (Initially Hidden) -->
+        <form id="update-progress-form" style="display: none;">
+            <input type="number" id="update-progress-id" placeholder="Progress ID" readonly>
+            <input type="number" id="update-progress-user-id" placeholder="User ID" required>
+            <input type="number" id="update-progress-weight" placeholder="Weight">
+            <input type="number" id="update-progress-workout-count" placeholder="Workout Count">
+            <input type="number" id="update-progress-calories-burned" placeholder="Calories Burned">
+            <input type="date" id="update-progress-date" placeholder="Date">
+            <input type="number" id="update-progress-goal-id" placeholder="Goal ID">
+            <button type="submit">Update Progress</button>
+            <button type="button" id="close-update-progress-form">Close Form</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
