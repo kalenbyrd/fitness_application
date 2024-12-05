@@ -21,6 +21,8 @@ def get_db():
         database='fitness'
     )
 
+
+
 # CREATE: Add a new user
 @app.route('/users', methods=['POST'])
 def create_user():
@@ -177,6 +179,7 @@ def create_progress():
     finally:
         cursor.close()
         db.close()
+
 
 
 # DELETE: Remove a user by ID and all related data
