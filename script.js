@@ -80,9 +80,14 @@ document.getElementById("add-user-form").addEventListener("submit", async (e) =>
             body: JSON.stringify({ email, name, age, height, weight })
         });
         const result = await response.json();
-        alert("User added successfully!");
-        document.getElementById("add-user-form").style.display = "none";  // Hide form after adding user
-        document.getElementById("toggle-add-form").textContent = "Add User";  // Reset button text
+        if (response.ok) {
+            alert("User added successfully!");
+            document.getElementById("add-user-form").style.display = "none"; // Hide form after adding user
+            document.getElementById("toggle-add-form").textContent = "Add User"; // Reset button text
+        } else {
+            // Show error message from server response
+            alert(`Error adding user: ${result.error || "Unknown error"}`);
+        }
     } catch (error) {
         console.error("Error adding user:", error);
     }
@@ -190,8 +195,12 @@ document.getElementById("add-workout-form").addEventListener("submit", async (e)
             body: JSON.stringify({ user_id, workout_type, duration, calories_burned, notes })
         });
         const result = await response.json();
-        alert("Workout added successfully!");
-        document.getElementById("add-workout-form").style.display = "none";  // Hide form after adding workout
+        if (response.ok) {
+            alert("Workout added successfully!");
+            document.getElementById("add-workout-form").style.display = "none";  // Hide form after adding workout
+        } else {
+            alert(`Error adding workout: ${result.error || "Unknown error"}`);
+        }
     } catch (error) {
         console.error("Error adding workout:", error);
     }
@@ -501,8 +510,12 @@ document.getElementById("add-exercise-form").addEventListener("submit", async (e
             body: JSON.stringify({ workout_id, exercise_name, sets, reps_per_set, duration, calories_burned_per_exercise })
         });
         const result = await response.json();
-        alert("Exercise added successfully!");
-        document.getElementById("add-exercise-form").style.display = "none"; // Hide form after adding
+        if (response.ok) {
+            alert("Exercise added successfully!");
+            document.getElementById("add-exercise-form").style.display = "none"; // Hide form after adding
+        } else {
+            alert(`Error adding exercise: ${result.error || "Unknown error"}`);
+        }
     } catch (error) {
         console.error("Error adding exercise:", error);
     }
@@ -675,8 +688,12 @@ document.getElementById("add-diet-form").addEventListener("submit", async (e) =>
             body: JSON.stringify({ user_id, meal_type, calories, description })
         });
         const result = await response.json();
-        alert("Diet entry added successfully!");
-        document.getElementById("add-diet-form").style.display = "none"; // Hide form after adding
+        if (response.ok) {
+            alert("Diet entry added successfully!");
+            document.getElementById("add-diet-form").style.display = "none"; // Hide form after adding
+        } else {
+            alert(`Error adding diet: ${result.error || "Unknown error"}`);
+        }
     } catch (error) {
         console.error("Error adding diet entry:", error);
     }
@@ -847,8 +864,12 @@ document.getElementById("add-goal-form").addEventListener("submit", async (e) =>
             body: JSON.stringify({ user_id, goal_type, target_value, current_progress, deadline, status })
         });
         const result = await response.json();
-        alert("Goal added successfully!");
-        document.getElementById("add-goal-form").style.display = "none"; // Hide form after adding
+        if (response.ok) {
+            alert("Goal added successfully!");
+            document.getElementById("add-goal-form").style.display = "none"; // Hide form after adding
+        } else {
+            alert(`Error adding goal: ${result.error || "Unknown error"}`);
+        }
     } catch (error) {
         console.error("Error adding goal:", error);
     }
@@ -1026,8 +1047,12 @@ document.getElementById("add-progress-form").addEventListener("submit", async (e
             body: JSON.stringify({ user_id, weight, workout_count, calories_burned, date, goal_id }),
         });
         const result = await response.json();
-        alert("Progress entry added successfully!");
-        document.getElementById("add-progress-form").style.display = "none";
+        if (response.ok) {
+            alert("Progress entry added successfully!");
+            document.getElementById("add-progress-form").style.display = "none";
+        } else {
+            alert(`Error adding progress: ${result.error || "Unknown error"}`);
+        }
     } catch (error) {
         console.error("Error adding progress:", error);
     }
