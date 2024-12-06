@@ -1,0 +1,404 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+    
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between; /* Logo stays left, navigation stays centered */    align-items: center;
+    background-color: #2d2d2d;
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* Allows positioning within the header */
+
+}
+
+header .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    text-align: left; /* Ensures logo text aligns left */
+}
+
+header .logo h1 {
+    color: #fff;
+    font-size: 28px;
+}
+
+header nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centers the navigation in the header */
+    
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px; /* Adjust padding for a larger clickable area */
+    text-align: center; /* Ensures the text is horizontally centered */
+    line-height: 1.5; /* Adjust line height for vertical centering */
+    display: inline-block; /* Ensures the padding and alignment work */
+    border-radius: 5px; /* Rounding for hover effect */
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #ff7f50;
+}
+
+
+/* account page */
+/* Left-align content specifically for the account page */
+.account-info {
+    text-align: left; /* Ensure all content is aligned to the left */
+    padding: 20px; /* Add padding for consistent spacing */
+}
+
+
+
+.update-form form{
+    display: block; /* Change from flex to block */
+    margin: 0; /* Remove auto margin */
+    max-width: none; /* Remove max-width constraint */
+    width: 100%; /* Allow the form to take up full width of its container */
+}
+
+
+.account-info h2 {
+    margin-bottom: 15px; /* Add spacing below headings */
+    text-align: left; /* Ensure all content is aligned to the left */
+}
+
+
+/* Main Content Section */
+main {
+    padding: 30px;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.welcome-section h2 {
+    font-size: 36px;
+    color: #2d2d2d;
+}
+
+.welcome-section p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Call-to-Action Boxes */
+.cta-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cta-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.cta-box h3 {
+    font-size: 24px;
+    color: #2d2d2d;
+    margin-bottom: 15px;
+}
+
+.cta-box p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.cta-box:hover {
+    transform: translateY(-10px);
+}
+
+
+.account-info {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-form {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+}
+
+
+/* Button Styles */
+button, a.btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* For buttons and links */
+    margin: 5px auto;
+}
+
+button:hover, a.btn:hover {
+    background-color: #2980b9;
+}
+
+button[type="button"] {
+    background-color: #e74c3c;
+}
+
+button[type="button"]:hover {
+    background-color: #c0392b;
+}
+
+
+
+/* Workouts Section */
+#workouts-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* Form and Button Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+form input, form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+form input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #000000;
+    color: white;
+}
+
+table td button {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+table td button:hover {
+    background-color: #e0a800;
+}
+
+
+
+
+/* Form and Table Styles */
+#exercises-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="number"], input[type="text"] {
+    font-size: 14px;
+}
+
+
+
+/* Table Styles */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.styled-table th {
+    background-color: #f2f2f2;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Show Form Styles */
+#add-exercise-form, #update-exercise-form {
+    display: none;
+}
+
+
+
+/* Diet Section */
+#diet-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Show Form Styles */
+#add-diet-form, #update-diet-form {
+    display: none;
+}
+
+
+/* Goals Section */
+#goals-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+/* Progress Section */
+#progress-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    header .logo {
+        margin-bottom: 10px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    form {
+        padding: 10px;
+    }
+}
+
+
+
+

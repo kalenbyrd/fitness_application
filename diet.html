@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChadFit</title>
+    <link rel="stylesheet" href="/styles/home.css">  <!-- Link to your external CSS -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>ChadFit</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/homepage.html">Home</a></li>
+                <li><a href="/workouts.html">Workouts</a></li>
+                <li><a href="/diet.html">Diet</a></li>
+                <li><a href="/goals.html">Goals</a></li>
+                <li><a href="/progress.html">Progress</a></li>
+                <li><a href="/myAccount.html">Account</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+    <!-- Diet Section -->
+        <div id="diet-section">
+    <h2>Diet</h2>
+
+    <!-- Form to enter User ID to fetch diet entries -->
+    <form id="diet-user-id-form">
+        <button type="submit">Show Diet Entries</button>
+    </form>
+
+    <!-- Button to show the "Add Diet Entry" form -->
+    <button id="show-add-diet-form-btn">Add New Diet Entry</button>
+
+    <!-- Table to display diet data -->
+    <table id="diet-table" border="1" style="display:none;">
+        <thead>
+            <tr>
+                
+                <th>Meal Type</th>
+                <th>Calories</th>
+                <th>Protein(g)</th>
+                <th>Carbs(g)</th>
+                <th>Fats(g)</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Diet data will be inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Add Diet Form (Initially Hidden) -->
+    <form id="add-diet-form" style="display:none;">
+        <!-- User ID is now fetched from localStorage, so no need for an input field here -->
+        <input type="text" id="diet-meal-type" placeholder="Meal Type (e.g., Breakfast, Lunch)" required>
+        <input type="number" id="diet-calories" placeholder="Calories" required>
+        <input type="number" id="diet-protein" placeholder="Protein (g)" required>
+        <input type="number" id="diet-carbs" placeholder="Carbs (g)" required>
+        <input type="number" id="diet-fats" placeholder="Fats (g)" required>
+        <input type="datetime-local" id="diet-date" placeholder="Date (optional)">
+        <button type="submit">Add Diet Entry</button>
+        <button type="button" id="close-add-diet-form">Close Form</button>
+    </form>
+
+    <!-- Update Diet Form (Initially Hidden) -->
+    <form id="update-diet-form" style="display:none;">
+        <input type="hidden" id="update-diet-id" placeholder="Diet ID" readonly>
+        <input type="hidden" id="update-diet-user-id" placeholder="User ID" required>
+        <input type="text" id="update-diet-meal-type" placeholder="Meal Type">
+        <input type="number" id="update-diet-calories" placeholder="Calories">
+        <input type="number" id="update-diet-protein" placeholder="Protein">
+        <input type="number" id="update-diet-carbs" placeholder="Carbs">
+        <input type="number" id="update-diet-fats" placeholder="Fats">
+        <input type="datetime-local" id="update-diet-date" placeholder="Date">
+
+        <button type="submit">Update Diet Entry</button>
+        <button type="button" id="close-update-diet-form">Close Form</button>
+    </form>
+</div>
+</main>
+
+<script src="/scripts/diet.js"></script>  <!-- Link to your JavaScript -->
+</body>
+</html>

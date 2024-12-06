@@ -7,6 +7,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pymysql
+import bcrypt
 
 app = Flask(__name__)
 
@@ -20,6 +21,76 @@ def get_db():
         password='yummy',
         database='fitness'
     )
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
+    email = data['email']
+    name = data['name']
+    age = data['age']
+    height = data['height']
+    weight = data['weight']
+    password = data['password']
+
+    # Hash the password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    
+    db = get_db()
+    cursor = db.cursor()
+
+    # Insert user into the database
+    try:
+        sql = """
+        INSERT INTO Users (email, name, age, height, weight, password_hash)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(sql, (email, name, age, height, weight, hashed_password.decode('utf-8')))
+        db.commit()
+        return jsonify({"message": "User created successfully"}), 201
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to create user"}), 400
+    finally:
+        cursor.close()
+        db.close()
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data['email']
+    password = data['password']
+    
+    sql = "SELECT user_id, email, name, password_hash FROM Users WHERE email = %s"
+
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute(sql, (email,))
+    result = cursor.fetchone()
+
+    if result:
+        stored_hash = result[3]  
+        user_data = {
+            "user_id": result[0],  
+            "email": result[1],    
+            "name": result[2],     
+        }
+
+        # Check the password
+        if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
+            return jsonify({
+                "message": "Login successful",
+                "user": user_data,
+                "token": "your_jwt_token_here"  # You can add a token if you plan to use JWT
+            }), 200
+        else:
+            return jsonify({"error": "Invalid password"}), 401
+    else:
+        return jsonify({"error": "User not found"}), 404
+    
+    cursor.close()
+    db.close()
+
 
 
 
@@ -54,16 +125,15 @@ def create_workout():
     workout_type = data.get('workout_type')
     duration = data.get('duration')
     calories_burned = data.get('calories_burned')
-    notes = data.get('notes')
 
     db = get_db()
     cursor = db.cursor()
     try:
         sql = """
-            INSERT INTO Workouts (user_id, workout_type, duration, calories_burned, notes)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO Workouts (user_id, workout_type, duration, calories_burned)
+            VALUES (%s, %s, %s, %s)
         """
-        cursor.execute(sql, (user_id, workout_type, duration, calories_burned, notes))
+        cursor.execute(sql, (user_id, workout_type, duration, calories_burned))
         db.commit()
         return jsonify({"message": "Workout added successfully!"}), 201
     except Exception as e:
@@ -341,11 +411,11 @@ def get_user_by_id(user_id):
            
             user = {
                 "user_id": result[0],
-                "email": result[1],
-                "name": result[2],
-                "age": result[3],
-                "height": result[4],
-                "weight": result[5]
+                "email": result[2],
+                "name": result[3],
+                "age": result[4],
+                "height": result[5],
+                "weight": result[6]
             }
             return jsonify(user), 200
         else:
@@ -621,10 +691,6 @@ def update_workout(workout_id):
         fields_to_update.append('calories_burned = %s')
         values.append(data['calories_burned'])
 
-    if 'notes' in data:
-        fields_to_update.append('notes = %s')
-        values.append(data['notes'])
-
     if not fields_to_update:
         return jsonify({"message": "No fields to update"}), 400
 
@@ -882,8 +948,7 @@ def get_user_workouts(user_id):
                     "workout_id": row[0],
                     "workout_type": row[1],
                     "duration": row[2],
-                    "calories_burned": row[3],
-                    "notes": row[4]
+                    "calories_burned": row[3]
                 } for row in results
             ]
             return jsonify(formatted_results), 200
@@ -902,7 +967,7 @@ def get_workout_by_id(workout_id):
 
     try:
         # Query to fetch the workout by its ID
-        sql = "SELECT workout_id, workout_type, duration, calories_burned, notes, user_id FROM Workouts WHERE workout_id = %s"
+        sql = "SELECT workout_id, workout_type, duration, calories_burned, user_id FROM Workouts WHERE workout_id = %s"
         cursor.execute(sql, (workout_id,))
         workout = cursor.fetchone()
 
@@ -913,8 +978,7 @@ def get_workout_by_id(workout_id):
                 "workout_type": workout[1],
                 "duration": workout[2],
                 "calories_burned": workout[3],
-                "notes": workout[4],
-                "user_id": workout[5]
+                "user_id": workout[4]
             }
             return jsonify(formatted_result), 200
         else:
@@ -932,25 +996,24 @@ def add_workout_with_exercises():
     db = get_db()
     cursor = db.cursor()
 
-    data = request.json  # JSON payload from the client
+    data = request.json  
     user_id = data.get("user_id")
     workout_details = data.get("workout_details")
     exercises = data.get("exercises")
 
     try:
-        db.begin()  # Start transaction
+        db.begin()  
 
         # Insert a new workout
         workout_sql = """
-            INSERT INTO Workouts (user_id, workout_type, duration, calories_burned, notes)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO Workouts (user_id, workout_type, duration, calories_burned)
+            VALUES (%s, %s, %s, %s)
         """
         cursor.execute(workout_sql, (
             user_id,
             workout_details.get("workout_type"),
             workout_details.get("duration"),
             workout_details.get("calories_burned"),
-            workout_details.get("notes")
         ))
         workout_id = cursor.lastrowid  # Get the ID of the new workout
 
@@ -972,7 +1035,7 @@ def add_workout_with_exercises():
         ]
         cursor.executemany(exercises_sql, formatted_exercises)
 
-        db.commit()  # Commit the transaction
+        db.commit()  
         return jsonify({"message": "Workout and exercises added successfully!"}), 201
     except Exception as e:
         db.rollback()  # Rollback the transaction in case of error

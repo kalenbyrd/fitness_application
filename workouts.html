@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workouts</title>
+    <link rel="stylesheet" href="/styles/home.css">  <!-- Link to your external CSS -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>ChadFit</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/homepage.html">Home</a></li>
+                <li><a href="/workouts.html">Workouts</a></li>
+                <li><a href="/diet.html">Diet</a></li>
+                <li><a href="/goals.html">Goals</a></li>
+                <li><a href="/progress.html">Progress</a></li>
+                <li><a href="/myAccount.html">Account</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+    <!-- Workouts Section -->
+    <div id="workouts-section">
+        <h2>Workouts</h2>
+        
+        <!-- Form to fetch workouts (user ID will be automatically fetched from localStorage) -->
+        <form id="workout-id-form">
+            <button type="submit">Show Workouts</button>
+        </form>
+
+        <!-- Button to show the "Add Workout" form -->
+        <button id="show-add-workout-form-btn">Add New Workout</button>
+        <button id="show-add-workout-with-exercises-form-btn">Add Workout with Exercises</button>
+
+        <!-- Table to display workout data -->
+        <table id="workouts-table" border="1" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Workout ID</th>
+                    <th>Workout Type</th>
+                    <th>Duration (minutes)</th>
+                    <th>Calories Burned</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Workout data will be inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Add Workout Form (Initially Hidden) -->
+        <form id="add-workout-form" style="display:none;">
+            <input type="text" id="workout-type" placeholder="Workout Type">
+            <input type="hidden" id="workout-duration" placeholder="Duration (minutes)">
+            <input type="hidden" id="workout-calories" placeholder="Calories Burned">
+            <button type="submit">Add Workout</button>
+            <button type="button" id="close-add-workout-form">Close Form</button>
+        </form>
+
+        <!-- Update Workout Form (Initially Hidden) -->
+        <form id="update-workout-form" style="display:none;">
+            <input type="hidden" id="update-workout-id" placeholder="Workout ID" readonly>
+            <input type="text" id="update-workout-type" placeholder="Workout Type">
+            <input type="hidden" id="update-workout-duration" placeholder="Duration (minutes)">
+            <input type="hidden" id="update-workout-calories" placeholder="Calories Burned">
+            <button type="submit">Update Workout</button>
+            <button type="button" id="close-update-workout-form">Close Form</button>
+        </form>
+
+        <!-- Add Workout with Exercises Form (Initially Hidden) -->
+        <form id="add-workout-with-exercises-form" style="display:none;">
+            <h3>Add Workout with Exercises</h3>
+            <h4>Workout Details</h4>
+            <input type="hidden" id="transaction-workout-user-id" placeholder="User ID" required>
+            <input type="text" id="transaction-workout-type" placeholder="Workout Type">
+            <input type="hidden" id="transaction-workout-duration" placeholder="Duration (minutes)">
+            <input type="hidden" id="transaction-workout-calories" placeholder="Calories Burned">
+            <h4>Exercises</h4>
+            <div id="transaction-exercises-container">
+                <div class="exercise-entry">
+                    <input type="text" class="transaction-exercise-name" placeholder="Exercise Name">
+                    <input type="number" class="transaction-exercise-sets" placeholder="Sets">
+                    <input type="number" class="transaction-exercise-reps" placeholder="Reps Per Set">
+                    <input type="number" class="transaction-exercise-duration" placeholder="Duration (minutes)">
+                    <input type="number" class="transaction-exercise-calories" placeholder="Calories Burned">
+                </div>
+            </div>
+           
+            <button type="submit" id="add-exercise-entry">Submit Workout with Exercises</button>
+            <button type="button" id="close-workout-with-exercises-form">Close Form</button>
+            
+        </form>
+
+    </div>
+
+        <!-- Exercises Section -->
+        <div id="exercises-section">
+            <h2>Exercises</h2>
+    
+            <!-- Form to enter Workout ID to fetch exercises -->
+            <form id="exercise-workout-id-form">
+                <input type="number" id="workout-id-input" placeholder="Enter Workout ID" required>
+                <button type="submit">Show Exercises</button>
+            </form>
+    
+            <!-- Button to show the "Add Exercise" form -->
+            <button id="show-add-exercise-form-btn">Add New Exercise</button>
+    
+            <!-- Table to display exercise data -->
+            <table id="exercises-table" border="1" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Exercise Name</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Duration (minutes)</th>
+                        <th>Calories Burned</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exercise data will be inserted here -->
+                </tbody>
+            </table>
+    
+            <!-- Add Exercise Form (Initially Hidden) -->
+            <form id="add-exercise-form" style="display:none;">
+                <input type="number" id="exercise-workout-id" placeholder="Workout ID" required>
+                <input type="text" id="exercise-name" placeholder="Exercise Name">
+                <input type="number" id="exercise-sets" placeholder="Sets">
+                <input type="number" id="exercise-reps" placeholder="Reps Per Set">
+                <input type="number" id="exercise-duration" placeholder="Duration (minutes)">
+                <input type="number" id="exercise-calories" placeholder="Calories Burned">
+                <button type="submit">Add Exercise</button>
+                <button type="button" id="close-add-exercise-form">Close Form</button>
+            </form>
+    
+            <!-- Update Exercise Form (Initially Hidden) -->
+            <form id="update-exercise-form" style="display:none;">
+                <input type="hidden" id="update-exercise-id" placeholder="Exercise ID" readonly>
+                <input type="hidden" id="update-exercise-workout-id" placeholder="Workout ID" required>
+                <input type="text" id="update-exercise-name" placeholder="Exercise Name">
+                <input type="number" id="update-exercise-sets" placeholder="Sets">
+                <input type="number" id="update-exercise-reps" placeholder="Reps Per Set">
+                <input type="number" id="update-exercise-duration" placeholder="Duration (minutes)">
+                <input type="number" id="update-exercise-calories" placeholder="Calories Burned">
+                <button type="submit">Update Exercise</button>
+                <button type="button" id="close-update-exercise-form">Close Form</button>
+            </form>
+        </div>
+    </main>
+<script src="/scripts/workout.js"></script>  <!-- Link to your JavaScript -->
+</body>
+</html>
