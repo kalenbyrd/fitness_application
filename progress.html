@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChadFit</title>
+    <link rel="stylesheet" href="/styles/home.css">  <!-- Link to your external CSS -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>ChadFit</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/homepage.html">Home</a></li>
+                <li><a href="/workouts.html">Workouts</a></li>
+                <li><a href="/diet.html">Diet</a></li>
+                <li><a href="/goals.html">Goals</a></li>
+                <li><a href="/progress.html">Progress</a></li>
+                <li><a href="/myAccount.html">Account</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+    <!-- Progress Section -->
+    <div id="progress-section">
+    <h2>Progress</h2>
+
+    <!-- Form to enter User ID to fetch progress -->
+    <form id="progress-user-id-form">
+        <button type="submit">Show Progress</button>
+        
+    </form>
+
+    <!-- Button to show the "Add Progress" form -->
+    <button id="show-add-progress-form-btn">Add New Progress</button>
+
+    <!-- Table to display progress data -->
+    <table id="progress-table" border="1" style="display: none;">
+        <thead>
+            <tr>
+                <th>Weight (kg)</th>
+                <th>Workout Count</th>
+                <th>Calories Burned</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Progress data will be inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Add Progress Form (Initially Hidden) -->
+    <form id="add-progress-form" style="display: none;">
+        <!-- Remove the User ID input, as it's handled by localStorage -->
+        <input type="number" id="progress-weight" placeholder="Weight">
+        <input type="number" id="progress-workout-count" placeholder="Workout Count">
+        <input type="number" id="progress-calories-burned" placeholder="Calories Burned">
+        <input type="date" id="progress-date" placeholder="Date">
+        <!-- Remove or pre-populate Goal ID -->
+        <button type="submit">Add Progress</button>
+        <button type="button" id="close-add-progress-form">Close Form</button>
+    </form>
+
+    <!-- Update Progress Form (Initially Hidden) -->
+    <form id="update-progress-form" style="display: none;">
+        <input type="hidden" id="update-progress-id" placeholder="Progress ID" readonly>
+        <!-- Remove or pre-populate User ID -->
+        <input type="number" id="update-progress-weight" placeholder="Weight">
+        <input type="number" id="update-progress-workout-count" placeholder="Workout Count">
+        <input type="number" id="update-progress-calories-burned" placeholder="Calories Burned">
+        <input type="date" id="update-progress-date" placeholder="Date">
+        <!-- Pre-populate Goal ID -->
+        <button type="submit">Update Progress</button>
+        <button type="button" id="close-update-progress-form">Close Form</button>
+    </form>
+</div>
+</main>
+
+<script src="/scripts/progress.js"></script>
+</body>
+</html>

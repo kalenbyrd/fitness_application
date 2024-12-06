@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - ChadFit</title>
+    <link rel="stylesheet" href="/styles/home.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>ChadFit</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/homepage.html">Home</a></li>
+                <li><a href="/workouts.html">Workouts</a></li>
+                <li><a href="/diet.html">Diet</a></li>
+                <li><a href="/goals.html">Goals</a></li>
+                <li><a href="/progress.html">Progress</a></li>
+                <li><a href="/myAccount.html">Account</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <div class="account-info">
+            <h2>Account Information</h2>
+            <div id="user-details">
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <p><strong>Name:</strong> <span id="user-name"></span></p>
+                <p><strong>Age:</strong> <span id="user-age"></span></p>
+                <p><strong>Height (cm):</strong> <span id="user-height"></span></p>
+                <p><strong>Weight (kg):</strong> <span id="user-weight"></span></p>
+            </div>
+        </div>
+
+        <div class="update-form">
+            <h3>Update Information</h3>
+            <form id="update-account-form">
+                <input type="text" id="update-email" placeholder="Email">
+                <input type="text" id="update-name" placeholder="Name">
+                <input type="number" id="update-age" placeholder="Age">
+                <input type="number" id="update-height" placeholder="Height (cm)">
+                <input type="number" id="update-weight" placeholder="Weight (kg)">
+                <button type="submit" id="account-button">Update Information</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="/scripts/account.js"></script>
+</body>
+</html>

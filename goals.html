@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChadFit</title>
+    <link rel="stylesheet" href="/styles/home.css">  <!-- Link to your external CSS -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>ChadFit</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/homepage.html">Home</a></li>
+                <li><a href="/workouts.html">Workouts</a></li>
+                <li><a href="/diet.html">Diet</a></li>
+                <li><a href="/goals.html">Goals</a></li>
+                <li><a href="/progress.html">Progress</a></li>
+                <li><a href="/myAccount.html">Account</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Goals Section -->
+        <div id="goals-section">
+            <h2>Goals</h2>
+    
+            <!-- Form to enter User ID to fetch goals -->
+            <form id="goal-user-id-form">
+                <button type="submit">Show Goals</button>
+            </form>
+    
+            <!-- Button to show the "Add Goal" form -->
+            <button id="show-add-goal-form-btn">Add New Goal</button>
+    
+            <!-- Table to display goal data -->
+            <table id="goals-table" border="1" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Goal Type</th>
+                        <th>Target(kg)</th>
+                        <th>Current Progress(kg)</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Goal data will be inserted here -->
+                </tbody>
+            </table>
+    
+             <!-- Add Goal Form (Initially Hidden) -->
+            <form id="add-goal-form" style="display:none;">
+                <input type="text" id="goal-type" placeholder="Goal Type">
+                <input type="number" id="goal-target-value" placeholder="Target Value">
+                <input type="number" id="goal-current-progress" placeholder="Current Progress">
+                <input type="date" id="goal-deadline" placeholder="Deadline">
+                
+                <!-- Status Dropdown -->
+                <select id="goal-status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+                
+                <button type="submit">Add Goal</button>
+                <button type="button" id="close-add-goal-form">Close Form</button>
+            </form>
+    
+            <!-- Update Goal Form (Initially Hidden) -->
+            <form id="update-goal-form" style="display:none;">
+                <input type="hidden" id="update-goal-id">
+                <input type="text" id="update-goal-type" placeholder="Goal Type">
+                <input type="number" id="update-goal-target-value" placeholder="Target Value">
+                <input type="number" id="update-goal-current-progress" placeholder="Current Progress">
+                <input type="date" id="update-goal-deadline" placeholder="Deadline">
+                
+                <!-- Status Dropdown for Update Form -->
+                <select id="update-goal-status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+                
+                <button type="submit">Update Goal</button>
+                <button type="button" id="close-update-goal-form">Close Form</button>
+            </form>
+        </div>
+    </main>
+
+<script src="/scripts/goal.js"></script>  <!-- Link to your JavaScript -->
+</body>
+</html>
